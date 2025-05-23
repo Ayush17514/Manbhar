@@ -1,116 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Elegant Jewelry</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body class="bg-white text-gray-900 font-sans">
-    <!-- Navbar -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
-      <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-        <h1 class="text-2xl font-bold text-pink-700">Elegant Jewelry</h1>
-        <nav class="space-x-4">
-          <a href="index.html" class="hover:text-pink-600">Home</a>
-          <a href="collections.html" class="hover:text-pink-600">Collections</a>
-          <a href="cad-design.html" class="hover:text-pink-600">CAD Services</a>
-          <a href="about.html" class="hover:text-pink-600">About</a>
-          <a href="contact.html" class="hover:text-pink-600">Contact</a>
-        </nav>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elegant Jewelry - Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+</head>
+<body class="font-sans bg-white text-gray-800">
+  <!-- Header -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <h1 class="text-2xl font-bold text-pink-700">Elegant Jewelry</h1>
+      <div class="hidden md:flex space-x-4">
+        <input type="text" placeholder="Search products..." class="border px-3 py-1 rounded-lg" />
+        <a href="#" class="hover:text-pink-600">Login</a>
+        <a href="#" class="hover:text-pink-600">Signup</a>
+        <a href="#" class="relative"><span class="material-icons">favorite</span></a>
+        <a href="#" class="relative"><span class="material-icons">shopping_cart</span></a>
       </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-pink-100 to-yellow-100 py-16">
-      <div class="container mx-auto px-4 text-center">
-        <h2 class="text-4xl font-bold text-pink-800 mb-4">Timeless Jewelry for Every Moment</h2>
-        <p class="mb-6 text-lg text-gray-700">Discover elegance in every piece, crafted with passion and precision.</p>
-        <a href="collections.html" class="bg-pink-600 text-white px-6 py-3 rounded-full shadow hover:bg-pink-700">Browse Collections</a>
+    </div>
+    <nav class="bg-pink-600 text-white py-2 text-sm">
+      <div class="max-w-7xl mx-auto px-4 flex space-x-6 overflow-x-auto">
+        <a href="index.html" class="hover:underline">Home</a>
+        <a href="collections.html" class="hover:underline">Collections</a>
+        <a href="cad-design.html" class="hover:underline">CAD Services</a>
+        <a href="about.html" class="hover:underline">About</a>
+        <a href="#" class="hover:underline">Blog</a>
+        <a href="contact.html" class="hover:underline">Contact</a>
       </div>
-    </section>
+    </nav>
+  </header>
 
-    <!-- Product Line Section -->
-    <section class="py-16 px-4">
-        <div class="container mx-auto">
-          <h2 class="text-3xl font-bold text-center text-pink-800 mb-12">Our Jewelry Line</h2>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <a href="collections.html#pendants" class="block shadow-lg hover:shadow-xl transition rounded overflow-hidden">
-              <img src="https://www.mannash.in/cdn/shop/products/MZRP386D848.jpg?v=1660049084" alt="Pendants" class="w-full h-64 object-cover" />
-              <div class="p-4">
-                <h3 class="text-xl font-semibold text-pink-700">Pendants</h3>
-                <p class="text-sm text-gray-600 mt-1">Exquisite pendant designs for every occasion</p>
-              </div>
-            </a>
-            <a href="collections.html#necklaces" class="block shadow-lg hover:shadow-xl transition rounded overflow-hidden">
-              <img src="https://laxmipearls.com/wp-content/uploads/2023/09/Green-designer-Necklace-Set-12-1.jpg" alt="Necklaces" class="w-full h-64 object-cover" />
-              <div class="p-4">
-                <h3 class="text-xl font-semibold text-pink-700">Necklaces</h3>
-                <p class="text-sm text-gray-600 mt-1">Elegant and bold necklace collections</p>
-              </div>
-            </a>
-            <a href="collections.html#earrings" class="block shadow-lg hover:shadow-xl transition rounded overflow-hidden">
-              <img src="https://www.teejh.com/cdn/shop/products/TEG270_2_1080x.jpg?v=1659959765" alt="Earrings" class="w-full h-64 object-cover" />
-              <div class="p-4">
-                <h3 class="text-xl font-semibold text-pink-700">Earrings</h3>
-                <p class="text-sm text-gray-600 mt-1">Chic and traditional earrings in all styles</p>
-              </div>
-            </a>
-            <a href="collections.html#bangles" class="block shadow-lg hover:shadow-xl transition rounded overflow-hidden">
-              <img src="https://www.shyle.in/cdn/shop/files/moh-intricate-flower-leaf-gold-tone-bangle-2.jpg?v=1737112717" alt="Bangles" class="w-full h-64 object-cover" />
-              <div class="p-4">
-                <h3 class="text-xl font-semibold text-pink-700">Bangles</h3>
-                <p class="text-sm text-gray-600 mt-1">Handcrafted bangles with stunning detail</p>
-              </div>
-            </a>
-            <a href="collections.html#rings" class="block shadow-lg hover:shadow-xl transition rounded overflow-hidden">
-              <img src="https://down-sg.img.susercontent.com/file/33638cb381a511b57881eb97d1455bfc" alt="Rings" class="w-full h-64 object-cover" />
-              <div class="p-4">
-                <h3 class="text-xl font-semibold text-pink-700">Rings</h3>
-                <p class="text-sm text-gray-600 mt-1">Graceful rings made for elegance and charm</p>
-              </div>
-            </a>
-            <a href="collections.html#bracelets" class="block shadow-lg hover:shadow-xl transition rounded overflow-hidden">
-              <img src="https://starkle.in/cdn/shop/files/dinf.png?v=1684509479" alt="Bracelets" class="w-full h-64 object-cover" />
-              <div class="p-4">
-                <h3 class="text-xl font-semibold text-pink-700">Bracelets</h3>
-                <p class="text-sm text-gray-600 mt-1">Stylish bracelets for modern looks</p>
-              </div>
-            </a>
-          </div>
-        </div>
-      </section>
-  
-      <!-- Footer -->
-      <footer class="bg-gray-900 text-white py-8">
-        <div class="container mx-auto px-4 grid md:grid-cols-3 gap-6">
-          <div>
-            <h5 class="font-semibold text-lg mb-2">Elegant Jewelry</h5>
-            <p class="text-sm">Crafting timeless beauty with CAD perfection. Located in Jaipur, India.</p>
-          </div>
-          <div>
-            <h5 class="font-semibold text-lg mb-2">Follow Us</h5>
-            <div class="flex space-x-4">
-              <a href="#" class="hover:text-pink-400">Instagram</a>
-              <a href="#" class="hover:text-pink-400">Facebook</a>
-              <a href="#" class="hover:text-pink-400">WhatsApp</a>
+  <!-- Hero Banner Carousel -->
+  <section class="relative">
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide relative h-[90vh]">
+          <img src="https://cdn.shopify.com/s/files/1/0625/9199/2045/files/Bridal_Banner_-_Desktop_b597de7a-d595-40c8-b746-d6c5c6daf7ab.jpg?v=1674889174" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div class="text-white text-center">
+              <h2 class="text-4xl font-bold mb-3">Timeless Beauty</h2>
+              <p>Exquisite designs handcrafted for every occasion</p>
+              <a href="#" class="mt-4 inline-block bg-pink-600 px-6 py-2 rounded-full text-white hover:bg-pink-700">Shop Now</a>
             </div>
           </div>
-          <div>
-            <h5 class="font-semibold text-lg mb-2">Visit Us</h5>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.698740992223!2d75.7873!3d26.9124!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db569b5f9b21f%3A0x771f89b5d17de1c2!2sJaipur%2C%20Rajasthan!5e0!3m2!1sen!2sin!4v1620323124290!5m2!1sen!2sin"
-              width="100%"
-              height="150"
-              style="border:0;"
-              allowfullscreen=""
-              loading="lazy"
-            ></iframe>
+        </div>
+        <!--
+        <div class="swiper-slide relative h-[75vh]">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-hyG81yoHwJO32DKDyEdkNqF0NUb98iKj3Q&s" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div class="text-white text-center">
+              <h2 class="text-4xl font-bold mb-3">Shine with Elegance</h2>
+              <p>Discover modern pieces with traditional roots</p>
+              <a href="#" class="mt-4 inline-block bg-pink-600 px-6 py-2 rounded-full text-white hover:bg-pink-700">View Collection</a>
+            </div>
+          </div>
+        </div>-->
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </section>
+
+
+  <!-- Product Line Section -->
+  <section class="py-16 px-4">
+    <div class="container mx-auto">
+      <h2 class="text-3xl font-bold text-center text-pink-800 mb-12">Our Jewelry Line</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <a href="collections.html#pendants" class="block shadow-lg hover:shadow-xl transition rounded overflow-hidden">
+          <img src="https://www.mannash.in/cdn/shop/products/MZRP386D848.jpg?v=1660049084" alt="Pendants" class="w-full h-64 object-cover" />
+          <div class="p-4">
+            <h3 class="text-xl font-semibold text-pink-700">Pendants</h3>
+            <p class="text-sm text-gray-600 mt-1">Exquisite pendant designs for every occasion</p>
+          </div>
+        </a>
+        <a href="collections.html#necklaces" class="block shadow-lg hover:shadow-xl transition rounded overflow-hidden">
+          <img src="https://laxmipearls.com/wp-content/uploads/2023/09/Green-designer-Necklace-Set-12-1.jpg" alt="Necklaces" class="w-full h-64 object-cover" />
+          <div class="p-4">
+            <h3 class="text-xl font-semibold text-pink-700">Necklaces</h3>
+            <p class="text-sm text-gray-600 mt-1">Elegant and bold necklace collections</p>
+          </div>
+        </a>
+        <a href="collections.html#earrings" class="block shadow-lg hover:shadow-xl transition rounded overflow-hidden">
+          <img src="https://www.teejh.com/cdn/shop/products/TEG270_2_1080x.jpg?v=1659959765" alt="Earrings" class="w-full h-64 object-cover" />
+          <div class="p-4">
+            <h3 class="text-xl font-semibold text-pink-700">Earrings</h3>
+            <p class="text-sm text-gray-600 mt-1">Chic and traditional earrings in all styles</p>
+          </div>
+        </a>
+        <a href="collections.html#bangles" class="block shadow-lg hover:shadow-xl transition rounded overflow-hidden">
+          <img src="https://www.shyle.in/cdn/shop/files/moh-intricate-flower-leaf-gold-tone-bangle-2.jpg?v=1737112717" alt="Bangles" class="w-full h-64 object-cover" />
+          <div class="p-4">
+            <h3 class="text-xl font-semibold text-pink-700">Bangles</h3>
+            <p class="text-sm text-gray-600 mt-1">Handcrafted bangles with stunning detail</p>
+          </div>
+        </a>
+        <a href="collections.html#rings" class="block shadow-lg hover:shadow-xl transition rounded overflow-hidden">
+          <img src="https://down-sg.img.susercontent.com/file/33638cb381a511b57881eb97d1455bfc" alt="Rings" class="w-full h-64 object-cover" />
+          <div class="p-4">
+            <h3 class="text-xl font-semibold text-pink-700">Rings</h3>
+            <p class="text-sm text-gray-600 mt-1">Graceful rings made for elegance and charm</p>
+          </div>
+        </a>
+        <a href="collections.html#bracelets" class="block shadow-lg hover:shadow-xl transition rounded overflow-hidden">
+          <img src="https://starkle.in/cdn/shop/files/dinf.png?v=1684509479" alt="Bracelets" class="w-full h-64 object-cover" />
+          <div class="p-4">
+            <h3 class="text-xl font-semibold text-pink-700">Bracelets</h3>
+            <p class="text-sm text-gray-600 mt-1">Stylish bracelets for modern looks</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="px-4 py-10 bg-gray-50">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl font-bold text-center text-pink-800 mb-10">Featured Products</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white shadow rounded-lg overflow-hidden">
+          <img src="https://res.cloudinary.com/dbyqeneej/image/upload/v1747984341/01_hfpl73.jpg" class="w-full h-48 object-cover" />
+          <div class="p-4">
+            <h3 class="text-lg font-semibold">Diamond Earring</h3>
+            <p class="text-sm text-gray-600">Crafted with 18K gold and solitaire brilliance</p>
+            <div class="mt-2 flex justify-between items-center">
+              <span class="text-pink-700 font-semibold">₹8,999</span>
+              <button class="text-sm bg-pink-600 text-white px-3 py-1 rounded hover:bg-pink-700">Add to Cart</button>
+            </div>
           </div>
         </div>
-        <div class="text-center text-sm mt-4">&copy; 2025 Elegant Jewelry. All rights reserved.</div>
-      </footer>
-    </body>
-  </html>
-  
+        <!-- Add more product cards similarly -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Announcements -->
+  <section class="bg-pink-100 py-4 text-center text-pink-800 font-medium">
+    Free shipping on all orders above ₹2,000! Limited time offer.
+  </section>
+
+  <!-- Trust Section -->
+  <section class="py-12 px-4">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+      <div>
+        <img src="https://img.icons8.com/external-flaticons-flat-flat-icons/64/000000/external-delivery-fast-delivery-flaticons-flat-flat-icons.png" class="mx-auto mb-2"/>
+        <h4 class="font-semibold">Free Delivery</h4>
+        <p class="text-sm">On all orders over ₹2000</p>
+      </div>
+      <div>
+        <img src="https://img.icons8.com/external-flat-juicy-fish/60/000000/external-return-policy-customer-support-flat-flat-juicy-fish.png" class="mx-auto mb-2"/>
+        <h4 class="font-semibold">Easy Returns</h4>
+        <p class="text-sm">7-day hassle free return</p>
+      </div>
+      <div>
+        <img src="https://img.icons8.com/color/60/diamond--v1.png" class="mx-auto mb-2"/>
+        <h4 class="font-semibold">Certified Jewelry</h4>
+        <p class="text-sm">100% genuine stones & metal</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-10 mt-16">
+    <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-4 gap-8">
+      <div>
+        <h5 class="font-semibold text-lg mb-3">Elegant Jewelry</h5>
+        <p class="text-sm">Crafting timeless beauty with CAD perfection. Based in Jaipur, India.</p>
+      </div>
+      <div>
+        <h5 class="font-semibold text-lg mb-3">Quick Links</h5>
+        <ul class="space-y-1 text-sm">
+          <li><a href="#" class="hover:text-pink-400">Contact</a></li>
+          <li><a href="#" class="hover:text-pink-400">Privacy Policy</a></li>
+          <li><a href="#" class="hover:text-pink-400">Returns</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="font-semibold text-lg mb-3">Follow Us</h5>
+        <ul class="space-y-1 text-sm">
+          <li><a href="#" class="hover:text-pink-400">Instagram</a></li>
+          <li><a href="#" class="hover:text-pink-400">Facebook</a></li>
+          <li><a href="#" class="hover:text-pink-400">YouTube</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="font-semibold text-lg mb-3">Newsletter</h5>
+        <form class="space-y-2">
+          <input type="email" placeholder="Email address" class="w-full px-3 py-2 rounded text-gray-900" />
+          <button class="w-full bg-pink-600 text-white py-2 rounded hover:bg-pink-700">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="text-center text-xs mt-8">&copy; 2025 Elegant Jewelry. All rights reserved.</div>
+  </footer>
+
+  <script>
+    new Swiper(".mySwiper", {
+      loop: true,
+      autoplay: { delay: 4000 },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev"
+      },
+    });
+  </script>
+</body>
+</html>
