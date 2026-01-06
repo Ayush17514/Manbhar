@@ -1,9 +1,0 @@
-
-services:
-  - type: web
-    name: manbhar
-    env: docker
-    plan: free
-    dockerfilePath: ./Dockerfile
-    region: singapore
-    branch: main
