@@ -1,3 +1,5 @@
-# Ignore database configuration
-/includes/db.php
-/klmvjenl_jaincabs.sql
+/node_modules
+/vendor
+/config
+/assets/css/output.css
+seed.sql

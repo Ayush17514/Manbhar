@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-require_once 'db.php';
+require_once __DIR__ . '/../config/db.php';
 
 $isLoggedIn = isset($_SESSION['user_id']);
 $userName = $isLoggedIn ? $_SESSION['user_name'] : null;
@@ -13,9 +13,14 @@ $userType = $_SESSION['user_type'] ?? 'customer';
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Jewelry Site</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="/assets/css/output.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+
   <script src="/assets/js/main.js" defer></script>
-  <script src="/assets/js/drawer.js" defer></script>
+  <script src="/assets/js/loader.js" defer></script>
+  <script src="/assets/js/dropdown.js" defer></script>
+  <script src="/assets/js/navigation.js" defer></script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
@@ -150,7 +155,7 @@ table tr:nth-child(even) {
 
     <!-- Left: Logo + Mobile Menu Toggle -->
     <div class="flex items-center">
-      <button id="drawerToggle" class="md:hidden mr-4 text-white hover:text-pink-400">
+      <button id="open-mobile-nav" class="md:hidden mr-4 text-white hover:text-pink-400">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
@@ -169,7 +174,7 @@ table tr:nth-child(even) {
     <div class="flex items-center space-x-4 text-white">
 
       <!-- Search-->
-      <button class="relative hover:text-pink-300 transition md:hidden">
+      <button id="open-search" class="relative hover:text-pink-300 transition md:hidden">
         <img src="/uploads/body/magnifiying-glass.png" alt="search icon" class="h-6 w-6">
       </button>
 
@@ -180,7 +185,7 @@ table tr:nth-child(even) {
       </button>
 
       <!-- Cart -->
-      <button id="cartButton" class="relative hover:text-pink-300 transition">
+      <button id="open-cart" class="relative hover:text-pink-300 transition">
         <img src="/uploads/body/bag.png" alt="Cart icon" class="h-6 w-6">
         <span id="cartCount" class="absolute -top-1 -right-1 text-xs bg-white text-[#273639] rounded-full px-1">0</span>
       </button>
@@ -188,7 +193,7 @@ table tr:nth-child(even) {
       <!-- Profile -->
       <?php if ($isLoggedIn): ?>
         <div class="relative">
-          <button id="userDropdownToggle" class="flex items-center space-x-1 hover:text-pink-300">
+          <button id="dropdown-button" class="flex items-center space-x-1 hover:text-pink-300">
             <span class="hidden md:inline text-white flex items-center"><?= htmlspecialchars($userName) ?></span>
 
             <img src="/uploads/body/profile-user.png" alt="profile" class="h-6 w-6">
@@ -197,7 +202,7 @@ table tr:nth-child(even) {
               <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
             </svg>
           </button>
-          <div id="userDropdown" class="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg hidden text-black z-50">
+          <div id="dropdown-menu" class="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg hidden text-black z-50">
             <?php if ($userType === 'admin'): ?>
               <a href="admin-panel" class="block px-4 py-2 hover:bg-gray-100 text-red-600">Admin Panel</a>
             <?php endif; ?>
@@ -230,11 +235,11 @@ table tr:nth-child(even) {
 </div>
 
 <!-- Mobile Drawer Nav -->
-<div id="mobileDrawer" class="fixed top-0 left-0 h-full w-64 bg-[#eaf6f6] shadow-lg z-[60] p-6 md:hidden transform -translate-x-full transition-transform duration-300">
+<div id="mobile-nav" class="fixed top-0 left-0 h-full w-64 bg-[#eaf6f6] shadow-lg z-[60] p-6 md:hidden hidden">
   <a href="index" class="flex items-center">
     <img src="/uploads/manbhar logo.png" alt="Logo" class="h-12 w-auto top-4 hover:scale-105 transition-transform">
   </a>
-  <button id="drawerClose" class="absolute top-4 right-4 text-gray-500 hover:text-pink-600 text-xl">×</button>
+  <button id="close-mobile-nav" class="absolute top-4 right-4 text-gray-500 hover:text-pink-600 text-xl">×</button>
   <nav class="mt-10 space-y-4 text-[#273639] font-semibold">
     <a href="/index" class="block hover:text-pink-500">Home</a>
     <a href="/collections" class="block hover:text-pink-500">Collections</a>
@@ -247,165 +252,30 @@ table tr:nth-child(even) {
 
 
 <!-- Drawers -->
-<div id="wishlistDrawer" class="fixed right-0 top-0 w-64 bg-[#F0F0F0] text-[#273639] shadow-lg h-full z-50 transform translate-x-full transition-transform duration-300 p-4 overflow-y-auto">
+<div id="wishlistDrawer" class="fixed right-0 top-0 w-64 bg-[#F0F0F0] text-[#273639] shadow-lg h-full z-50 hidden p-4 overflow-y-auto">
   <h2 class="text-xl font-bold text-black mb-4">Your Wishlist</h2>
   <div id="wishlistDrawerBody">Loading...</div>
   <button onclick="toggleDrawer('wishlistDrawer')" class="absolute top-4 right-4 text-gray-500 hover:text-pink-600">✕</button>
 </div>
 
-<div id="cartDrawer" class="fixed right-0 top-0 w-64 bg-[#F0F0F0] text-white shadow-lg h-full z-50 transform translate-x-full transition-transform duration-300 p-4 overflow-y-auto">
+<div id="search-drawer" class="fixed right-0 top-0 w-64 bg-[#F0F0F0] text-white shadow-lg h-full z-50 hidden p-4 overflow-y-auto">
+  <h2 class="text-xl font-bold text-black mb-4">Search</h2>
+    <input type="text" placeholder="Search jewelry..." class="w-full px-4 py-1 text-sm rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-300 transition">
+  <button id="close-search" class="absolute top-4 right-4 text-gray-500 hover:text-pink-600">✕</button>
+</div>
+<div id="cart-drawer" class="fixed right-0 top-0 w-64 bg-[#F0F0F0] text-white shadow-lg h-full z-50 hidden p-4 overflow-y-auto">
   <h2 class="text-xl font-bold text-black mb-4">Your Cart</h2>
   <div id="cartDrawerBody" class="h-full flex flex-col max-h-[90vh]">Loading...</div>
-  <button onclick="toggleDrawer('cartDrawer')" class="absolute top-4 right-4 text-gray-500 hover:text-pink-600">✕</button>
+  <button id="close-cart" class="absolute top-4 right-4 text-gray-500 hover:text-pink-600">✕</button>
 </div>
 
 <!-- Toast -->
 <div id="toast" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-pink-600 text-white px-4 py-2 rounded shadow-lg hidden z-[9999] text-sm"></div>
 
-<script src="/js/main.js"></script>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // On product page, $product['id'] is available
-    initTracking(<?= $product['id'] ?? 'null' ?>);
+    initPage(<?= $product['id'] ?? 'null' ?>);
 });
-</script>
-
-<script>
-window.addEventListener('DOMContentLoaded', () => {
-  // Ensure drawer starts closed on load
-  const drawer = document.getElementById('mobileDrawer');
-  drawer.classList.add('-translate-x-full');
-});
-
-const drawerToggle = document.getElementById('drawerToggle');
-const drawer = document.getElementById('mobileDrawer');
-const drawerClose = document.getElementById('drawerClose');
-
-drawerToggle.addEventListener('click', () => {
-  drawer.classList.remove('-translate-x-full');
-  document.body.classList.add('overflow-hidden');
-});
-
-drawerClose.addEventListener('click', () => {
-  drawer.classList.add('-translate-x-full');
-  document.body.classList.remove('overflow-hidden');
-});
-
-document.addEventListener('click', (e) => {
-  if (!drawer.contains(e.target) && !drawerToggle.contains(e.target)) {
-    drawer.classList.add('-translate-x-full');
-    document.body.classList.remove('overflow-hidden');
-  }
-});
-
-  // Dropdown toggle
-  const userBtn = document.getElementById("userDropdownToggle");
-  const userDropdown = document.getElementById("userDropdown");
-  userBtn?.addEventListener("click", () => userDropdown.classList.toggle("hidden"));
-
-  // Scroll hide nav
-  let lastScrollY = window.scrollY;
-  const scrollNav = document.getElementById('scrollNav');
-  window.addEventListener('scroll', () => {
-    scrollNav.style.transform = window.scrollY > lastScrollY ? 'translateY(-100%)' : 'translateY(0)';
-    lastScrollY = window.scrollY;
-  });
-</script>
-
-<!-- Wishlist / Cart / Toast -->
-<script>
-function updateWishlistCount() {
-  fetch('ajax/wishlist-count')
-    .then(res => res.json())
-    .then(data => document.querySelectorAll('#wishlistCount').forEach(el => el.textContent = data.count));
-}
-
-function updateCartCount() {
-  fetch('ajax/cart-count')
-    .then(res => res.json())
-    .then(data => document.querySelectorAll('#cartCount').forEach(el => el.textContent = data.count));
-}
-
-function showToast(msg) {
-  const toast = document.getElementById('toast');
-  toast.textContent = msg;
-  toast.classList.remove('hidden');
-  setTimeout(() => toast.classList.add('hidden'), 1800);
-}
-
-function toggleWishlist(id, btn = null) {
-  fetch('ajax/add-to-wishlist', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: 'product_id=' + id
-  })
-  .then(res => res.json())
-  .then(data => {
-    updateWishlistCount();
-    showToast(data.action === 'added' ? 'Added to Wishlist 💖' : 'Removed from Wishlist');
-  });
-}
-
-function addToCart(id) {
-  fetch('ajax/add-to-cart', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: 'product_id=' + id + '&quantity=1'
-  })
-  .then(() => {
-    updateCartCount();
-    showToast('Added to Cart 🛒');
-  });
-}
-</script>
-
-<!-- Loader -->
-<script>
-  const loader = document.getElementById("jewelry-loader");
-  const loaderImg = document.getElementById("iconLoader");
-
-  const icons = [
-    "/uploads/icons/earrings.png",
-    "/uploads/icons/diamond-ring.png",
-    "/uploads/icons/earrings (1).png",
-    "/uploads/icons/pendant.png",
-    "/uploads/icons/necklace.png",
-    "/uploads/icons/box.png",
-    "/uploads/icons/jewelry (1).png",
-  ];
-
-  const pageKey = "manbhar_loader_shown_" + window.location.pathname;
-
-  if (!sessionStorage.getItem(pageKey)) {
-    document.body.style.overflow = "hidden";
-    loader.style.display = "flex";
-    loaderImg.classList.add("opacity-100");
-
-    let index = 1;
-    const rotateIcons = () => {
-      loaderImg.classList.remove("opacity-100");
-      loaderImg.classList.add("opacity-0");
-      setTimeout(() => {
-        loaderImg.src = icons[index];
-        loaderImg.classList.remove("opacity-0");
-        loaderImg.classList.add("opacity-100");
-        index = (index + 1) % icons.length;
-      }, 300);
-    };
-
-    const interval = setInterval(rotateIcons, 700);
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        loader.classList.add("opacity-0");
-        clearInterval(interval);
-        setTimeout(() => {
-          loader.remove();
-          document.body.style.overflow = "";
-          sessionStorage.setItem(pageKey, "true");
-        }, 500);
-      }, 2000);
-    });
-  } else {
-    loader.remove();
-  }
 </script>

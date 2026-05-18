@@ -1,6 +1,6 @@
 <?php
 // ajax/fetch-reviews.php
-require_once '../includes/db.php';
+require_once __DIR__ . '/../../config/db.php';
 
 $product_id = intval($_GET['product_id'] ?? 0);
 if (!$product_id) {

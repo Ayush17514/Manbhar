@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__.'/../includes/db.php';
+require_once __DIR__ . '/../../config/db.php';
 
 $count = 0;
 if(isset($_SESSION['user_id'])) {
