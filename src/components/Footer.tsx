@@ -57,15 +57,22 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10">
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="flex items-center gap-2">
-              <Gem className="w-6 h-6 text-[#C5A880]" />
-              <span className="font-serif text-2xl font-bold tracking-wider text-white">
+            <div
+              onClick={() => navigate('home')}
+              className="cursor-pointer inline-flex items-center gap-2.5 group"
+            >
+              <img
+                src="/uploads/manbhar.png"
+                alt="Manbhar"
+                className="h-8 w-auto object-contain brightness-0 invert"
+                onError={(e) => {
+                  (e.target as HTMLElement).style.display = 'none';
+                }}
+              />
+              <span className="font-serif text-2xl font-bold tracking-wider text-white group-hover:text-[#C5A880] transition">
                 MANBHAR
               </span>
             </div>
-            <p className="text-xs uppercase tracking-widest text-[#C5A880] font-semibold">
-              Fine Handcrafted Jewelry • Jaipur Heritage
-            </p>
             <p className="text-sm text-gray-300 leading-relaxed max-w-sm">
               Rooted in the royal artisanal traditions of Jaipur, Manbhar creates certified gold, diamond, and silver ornaments that blend eternal devotion with modern luxury aesthetics.
             </p>

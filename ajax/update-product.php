@@ -1,5 +1,9 @@
 <?php
-include 'db.php';
+if (file_exists(__DIR__ . '/../includes/db.php')) {
+    require_once __DIR__ . '/../includes/db.php';
+} elseif (file_exists(__DIR__ . '/../config/db.php')) {
+    require_once __DIR__ . '/../config/db.php';
+}
 $id = $_POST['id'];
 $title = $_POST['title'];
 $description = $_POST['description'];

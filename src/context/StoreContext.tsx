@@ -40,7 +40,7 @@ interface StoreContextType {
   updateProduct: (id: number, productData: Partial<Product>) => void;
   deleteProduct: (id: number) => void;
   submitEnquiry: (enquiry: Omit<Enquiry, 'id' | 'created_at'>) => void;
-  login: (email: string, name?: string, role?: 'admin' | 'customer') => void;
+  login: (email: string, name?: string, role?: 'admin' | 'customer', phone?: string) => void;
   logout: () => void;
   toast: { message: string; type: 'success' | 'info' | 'error' } | null;
   showToast: (message: string, type?: 'success' | 'info' | 'error') => void;
@@ -419,11 +419,17 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     showToast('Thank you for contacting Manbhar! Our jewellery expert will reach out soon.', 'success');
   };
 
-  const login = (email: string, name?: string, role: 'admin' | 'customer' = 'customer') => {
+  const login = (
+    email: string,
+    name?: string,
+    role: 'admin' | 'customer' = 'customer',
+    phone?: string
+  ) => {
     const newUser: User = {
       id: Date.now(),
       email,
       name: name || email.split('@')[0],
+      phone: phone || '+91 96944 10462',
       role
     };
     setUser(newUser);

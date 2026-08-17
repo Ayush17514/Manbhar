@@ -55,7 +55,7 @@ const AppContent: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col bg-[#fef9f5] text-[#2f2f2f] selection:bg-[#C5A880]/30 selection:text-[#273639]">
       <Header />
-      <main className="flex-1 pt-24 sm:pt-28">
+      <main className="flex-1 pt-16 sm:pt-20">
         {renderView()}
       </main>
       <Footer />

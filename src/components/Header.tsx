@@ -12,7 +12,8 @@ export const Header: React.FC = () => {
     setIsCartOpen,
     categories,
     products,
-    user
+    user,
+    logout
   } = useStore();
 
   const [isScrolled, setIsScrolled] = useState(false);
@@ -21,6 +22,7 @@ export const Header: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isCategoriesDropdownOpen, setIsCategoriesDropdownOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const totalCartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
@@ -28,7 +30,7 @@ export const Header: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 10);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -54,44 +56,12 @@ export const Header: React.FC = () => {
 
   return (
     <header className="fixed top-0 inset-x-0 z-40">
-      {/* Top Announcement Bar */}
-      <div className="bg-[#273639] text-[#F7E7CE] text-[11px] py-1.5 px-4 tracking-wider uppercase font-medium">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="hidden sm:flex items-center gap-4">
-            <span className="flex items-center gap-1">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#C5A880]" />
-              100% Certified BIS Hallmarked
-            </span>
-            <span className="hidden md:inline text-white/40">|</span>
-            <span className="hidden md:flex items-center gap-1 text-white/80">
-              <MapPin className="w-3.5 h-3.5 text-[#C5A880]" />
-              Jaipur Flagship Studio
-            </span>
-          </div>
-
-          <div className="mx-auto sm:mx-0 flex items-center gap-1.5 text-white/90">
-            <Sparkles className="w-3.5 h-3.5 text-[#C5A880]" />
-            <span>Free Insured Express Shipping On Orders Over ₹4,999</span>
-          </div>
-
-          <div className="hidden lg:flex items-center gap-3">
-            <a
-              href="tel:+919694410462"
-              className="flex items-center gap-1 text-white/80 hover:text-white transition"
-            >
-              <Phone className="w-3 h-3 text-[#C5A880]" />
-              <span>+91 96944 10462</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
       {/* Main Navbar */}
       <div
         className={`transition-all duration-300 ${
           isScrolled
             ? 'bg-white/95 backdrop-blur-md shadow-md py-3'
-            : 'bg-[#fef9f5] border-b border-[#C5A880]/20 py-4'
+            : 'bg-[#fef9f5] border-b border-[#C5A880]/20 py-3.5 sm:py-4'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -204,16 +174,16 @@ export const Header: React.FC = () => {
             </nav>
           </div>
 
-          {/* Center: Brand Logo */}
+          {/* Center: Brand Logo (Clean, No Subscript) */}
           <div
             onClick={() => navigate('home')}
-            className="cursor-pointer flex flex-col items-center select-none"
+            className="cursor-pointer flex items-center justify-center select-none group"
           >
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2.5">
               <img
                 src="/uploads/manbhar.png"
-                alt="Manbhar Fine Jewelry"
-                className="h-9 sm:h-11 object-contain"
+                alt="Manbhar"
+                className="h-8 sm:h-10 w-auto object-contain group-hover:scale-105 transition-transform"
                 onError={(e) => {
                   (e.target as HTMLElement).style.display = 'none';
                 }}
@@ -222,9 +192,6 @@ export const Header: React.FC = () => {
                 MANBHAR
               </span>
             </div>
-            <span className="text-[9px] uppercase tracking-[0.3em] text-[#C5A880] font-semibold -mt-1">
-              Fine Jewelry • Jaipur
-            </span>
           </div>
 
           {/* Right: Actions */}
@@ -331,37 +298,94 @@ export const Header: React.FC = () => {
               )}
             </button>
 
-            {/* User / Profile Account */}
-            <button
-              onClick={() => {
-                if (user) {
-                  navigate('profile');
-                } else {
-                  setIsAuthModalOpen(true);
-                }
-              }}
-              className="p-2 text-gray-700 hover:text-[#273639] hover:bg-gray-100 rounded-full transition relative"
-              aria-label="Account"
-              title={user ? `Signed in as ${user.name}` : 'Sign In'}
-            >
-              <User className="w-5 h-5" />
-              {user && (
-                <span className="absolute bottom-1 right-1 w-2 h-2 bg-emerald-500 rounded-full border border-white" />
+            {/* User / Authentication Dropdown or Trigger */}
+            <div className="relative">
+              {user ? (
+                <div>
+                  <button
+                    onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                    className="flex items-center gap-2 p-1.5 sm:px-3 sm:py-1.5 rounded-full border border-[#C5A880]/30 hover:border-[#C5A880] bg-[#fef9f5] hover:bg-white transition text-xs font-medium text-[#273639]"
+                    title={`Logged in as ${user.name}`}
+                  >
+                    <div className="w-6 h-6 rounded-full bg-[#273639] text-[#C5A880] flex items-center justify-center text-xs font-bold">
+                      {user.name.charAt(0).toUpperCase()}
+                    </div>
+                    <span className="hidden sm:inline font-semibold">{user.name.split(' ')[0]}</span>
+                    <ChevronDown className="w-3.5 h-3.5 text-gray-400 hidden sm:inline" />
+                  </button>
+
+                  {/* User Menu Dropdown */}
+                  {isUserMenuOpen && (
+                    <div
+                      onMouseLeave={() => setIsUserMenuOpen(false)}
+                      className="absolute right-0 top-full mt-2 w-56 bg-white rounded-2xl shadow-2xl border border-gray-100 p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150"
+                    >
+                      <div className="p-3 border-b border-gray-100">
+                        <p className="text-xs font-bold text-gray-900 truncate">{user.name}</p>
+                        <p className="text-[11px] text-gray-500 truncate">{user.email}</p>
+                        <span className="inline-block mt-1 text-[10px] font-semibold uppercase tracking-wider bg-[#fef9f5] text-[#273639] border border-[#C5A880]/30 px-2 py-0.5 rounded-full">
+                          {user.role}
+                        </span>
+                      </div>
+                      <div className="py-1">
+                        <button
+                          onClick={() => {
+                            navigate('profile');
+                            setIsUserMenuOpen(false);
+                          }}
+                          className="w-full text-left px-3 py-2 text-xs font-medium text-gray-700 hover:bg-gray-50 rounded-xl transition"
+                        >
+                          My Profile & Orders
+                        </button>
+                        {user.role === 'admin' && (
+                          <button
+                            onClick={() => {
+                              navigate('admin');
+                              setIsUserMenuOpen(false);
+                            }}
+                            className="w-full text-left px-3 py-2 text-xs font-medium text-[#C5A880] hover:bg-[#fef9f5] rounded-xl transition font-semibold"
+                          >
+                            Admin Dashboard
+                          </button>
+                        )}
+                        <button
+                          onClick={() => {
+                            logout();
+                            setIsUserMenuOpen(false);
+                          }}
+                          className="w-full text-left px-3 py-2 text-xs font-medium text-rose-600 hover:bg-rose-50 rounded-xl transition"
+                        >
+                          Sign Out
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <button
+                  onClick={() => setIsAuthModalOpen(true)}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#273639] hover:bg-[#3C4A4C] text-[#C5A880] text-xs font-semibold tracking-wider transition shadow-sm"
+                >
+                  <User className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">Sign In</span>
+                </button>
               )}
-            </button>
+            </div>
 
             {/* Admin Switch Link */}
-            <button
-              onClick={() => navigate('admin')}
-              className={`hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold tracking-wider transition ${
-                currentRoute.view === 'admin'
-                  ? 'bg-[#C5A880] text-[#273639]'
-                  : 'bg-[#273639] text-[#C5A880] hover:bg-[#3C4A4C]'
-              }`}
-            >
-              <Layers className="w-3.5 h-3.5" />
-              <span>Admin</span>
-            </button>
+            {user?.role === 'admin' && (
+              <button
+                onClick={() => navigate('admin')}
+                className={`hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold tracking-wider transition ${
+                  currentRoute.view === 'admin'
+                    ? 'bg-[#C5A880] text-[#273639]'
+                    : 'bg-[#fef9f5] text-[#273639] border border-[#C5A880]/30 hover:bg-white'
+                }`}
+              >
+                <Layers className="w-3.5 h-3.5" />
+                <span>Admin</span>
+              </button>
+            )}
           </div>
         </div>
       </div>

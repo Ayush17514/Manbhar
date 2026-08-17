@@ -1,6 +1,12 @@
 <?php
-session_start();
-require_once 'api/db.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+if (file_exists(__DIR__ . '/../includes/db.php')) {
+    require_once __DIR__ . '/../includes/db.php';
+} elseif (file_exists(__DIR__ . '/../config/db.php')) {
+    require_once __DIR__ . '/../config/db.php';
+}
 
 // Redirect if user is not logged in
 if (!isset($_SESSION['user_id'])) {
