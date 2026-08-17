@@ -2,6 +2,10 @@
 export default {
   content: [
     "./index.html",
+    "./*.php",
+    "./includes/**/*.php",
+    "./admin/**/*.php",
+    "./ajax/**/*.php",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
