@@ -1,0 +1,8 @@
+{
+  "name": "Manbhar - Fine Jewelry",
+  "description": "Handcrafted gold, diamond, and silver fine jewelry store with dynamic collections, cart, checkout, customer reviews, and admin dashboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

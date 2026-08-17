@@ -1,12 +1,30 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
-    "./**/*.{php,html,js}",
-    "./includes/**/*.{php,html,js}",
-    "./assets/js/**/*.{php,html,js}"
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        brand: {
+          DEFAULT: '#273639',
+          dark: '#153448',
+          light: '#3C4A4C',
+          gold: '#C5A880',
+          accent: '#D4AF37',
+          champagne: '#F7E7CE',
+          pink: '#be185d',
+          rose: '#e11d48',
+          ivory: '#fef9f5',
+          cream: '#faf5f0'
+        }
+      },
+      fontFamily: {
+        heading: ['Marcellus', 'Playfair Display', 'serif'],
+        body: ['Poppins', 'Montserrat', 'sans-serif'],
+      }
+    },
   },
   plugins: [],
 }
